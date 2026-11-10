@@ -37,3 +37,5 @@ next-env.d.ts
 *.mp4
 *.zip
 logo-transparent.png
+
+.vercel
