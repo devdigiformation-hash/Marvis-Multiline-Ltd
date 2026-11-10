@@ -65,18 +65,6 @@ export default function HomePage() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-4xl mx-auto space-y-6">
-            
-            {/* Logo Display */}
-            <div className="inline-flex items-center justify-center p-3 bg-white rounded-2xl shadow-xl border border-brand-gold/40 mb-2 transform hover:scale-105 transition-transform duration-300">
-              <Image
-                src="/logo.png"
-                alt="Marvis Multiline Ltd Official Logo"
-                width={84}
-                height={84}
-                className="object-contain"
-                priority
-              />
-            </div>
 
             {/* Division Badge */}
             <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-brand-navy-light/60 border border-brand-gold/40 text-brand-gold text-xs sm:text-sm font-semibold tracking-wide">

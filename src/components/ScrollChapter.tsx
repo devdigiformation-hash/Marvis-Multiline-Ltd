@@ -48,13 +48,31 @@ export default function ScrollChapter({
   const activeFrameRef = useRef<number>(1);
   const rafIdRef = useRef<number | null>(null);
 
+  const [headerHeight, setHeaderHeight] = useState<number>(72);
   const [isNearViewport, setIsNearViewport] = useState(false);
   const [loadProgress, setLoadProgress] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const [currentFrameDisplay, setCurrentFrameDisplay] = useState(1);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
-  // Check reduced motion
+  // Measure rendered sticky header height dynamically
+  useEffect(() => {
+    const updateHeaderHeight = () => {
+      const headerEl = document.querySelector('header');
+      if (headerEl) {
+        const rect = headerEl.getBoundingClientRect();
+        if (rect.height > 0) {
+          setHeaderHeight(Math.round(rect.height));
+        }
+      }
+    };
+
+    updateHeaderHeight();
+    window.addEventListener('resize', updateHeaderHeight);
+    return () => window.removeEventListener('resize', updateHeaderHeight);
+  }, []);
+
+  // Check reduced motion preference
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -86,7 +104,7 @@ export default function ScrollChapter({
     const iw = img.naturalWidth || 1920;
     const ih = img.naturalHeight || 1080;
 
-    // Cover math
+    // Cover math preserving subject-safe framing
     const hRatio = cw / iw;
     const vRatio = ch / ih;
     const ratio = Math.max(hRatio, vRatio);
@@ -118,8 +136,8 @@ export default function ScrollChapter({
       if (cached && cached.complete) {
         drawFrame(cached);
       } else {
-        // Find nearest loaded frame
-        for (let offset = 1; offset < 10; offset++) {
+        // Fallback to nearest loaded frame
+        for (let offset = 1; offset < 15; offset++) {
           const lower = imagesCacheRef.current.get(clamped - offset);
           if (lower && lower.complete) {
             drawFrame(lower);
@@ -141,6 +159,7 @@ export default function ScrollChapter({
     const canvas = canvasRef.current;
     if (!canvas) return;
     const rect = canvas.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     canvas.width = Math.round(rect.width * dpr);
     canvas.height = Math.round(rect.height * dpr);
@@ -167,14 +186,14 @@ export default function ScrollChapter({
     return () => observer.disconnect();
   }, []);
 
-  // Preload initial poster and progressively load frames when near viewport
+  // Preload frames progressively when near viewport
   useEffect(() => {
     if (!isNearViewport || prefersReducedMotion) return;
 
     let loadedCount = 0;
     const totalToLoad = frameCount;
 
-    // Load keyframe anchor frames first (every 5th frame for fast responsiveness), then fill in
+    // Load keyframe anchor frames first (every 4th frame for instant scrub response), then fill in
     const keyframes: number[] = [];
     const normalFrames: number[] = [];
 
@@ -210,7 +229,7 @@ export default function ScrollChapter({
 
     // Stagger loading
     loadOrder.forEach((idx, orderIndex) => {
-      if (orderIndex < 10) {
+      if (orderIndex < 12) {
         loadImage(idx);
       } else {
         setTimeout(() => loadImage(idx), Math.min(orderIndex * 15, 1200));
@@ -224,7 +243,7 @@ export default function ScrollChapter({
     };
   }, [isNearViewport, prefersReducedMotion, frameCount, getFrameUrl, drawFrame, handleResize]);
 
-  // Scroll handler tied to container progress
+  // Center-pinned scroll scrub handler
   useEffect(() => {
     if (prefersReducedMotion) return;
 
@@ -236,20 +255,30 @@ export default function ScrollChapter({
         const container = containerRef.current;
         if (!container) return;
 
-        const rect = container.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
         const windowHeight = window.innerHeight;
+        
+        // Pin begins when container top reaches header height (safe visible top)
+        // Usable viewport height below header:
+        const usableHeight = windowHeight - headerHeight;
+        
+        // Total scrollable travel distance within this chapter while pinned:
+        const scrollDistance = containerRect.height - usableHeight;
+        if (scrollDistance <= 0) return;
 
-        // Start scrub when container top reaches bottom of viewport, finish when container bottom leaves top
-        // Or sticky container progress:
-        // Container height is e.g. 180vh. Visual is sticky inside.
-        const scrollableDistance = rect.height - windowHeight;
-        if (scrollableDistance <= 0) return;
+        // Current scroll offset into the pin stage:
+        const scrolledDistance = headerHeight - containerRect.top;
+        
+        // Normalized progress strictly in [0, 1]
+        const progress = Math.max(0, Math.min(1, scrolledDistance / scrollDistance));
 
-        // Current progress [0 to 1]
-        const topOffset = -rect.top;
-        const progress = Math.max(0, Math.min(1, topOffset / scrollableDistance));
+        // Exact frame mapping:
+        // frameIndex = clamp(round(progress * (N - 1)), 0, N - 1) + 1
+        const targetFrame = Math.min(
+          frameCount,
+          Math.max(1, Math.round(progress * (frameCount - 1)) + 1)
+        );
 
-        const targetFrame = Math.round(progress * (frameCount - 1)) + 1;
         if (targetFrame !== activeFrameRef.current) {
           renderFrameIndex(targetFrame);
         }
@@ -257,11 +286,14 @@ export default function ScrollChapter({
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    // Initial calculation on mount
+    handleScroll();
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
     };
-  }, [frameCount, renderFrameIndex, prefersReducedMotion]);
+  }, [frameCount, renderFrameIndex, prefersReducedMotion, headerHeight]);
 
   // Visual order on desktop: right visual = content on left, visual on right; left visual = visual on left, content on right.
   const isVisualRight = desktopAlign === 'right';
@@ -270,12 +302,18 @@ export default function ScrollChapter({
     <section
       ref={containerRef}
       id={slug}
-      className="relative min-h-[160vh] md:min-h-[180vh] bg-brand-surface-dark border-b border-brand-navy-light/40"
+      className="relative min-h-[200vh] sm:min-h-[220vh] bg-brand-surface-dark border-b border-brand-navy-light/40"
     >
-      {/* Sticky viewport frame */}
-      <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-8 md:py-0">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      {/* Pinned Stage: Anchored strictly below header, vertically centered in usable viewport */}
+      <div
+        style={{
+          top: `${headerHeight}px`,
+          height: `calc(100vh - ${headerHeight}px)`,
+        }}
+        className="sticky w-full flex items-center justify-center overflow-hidden z-10"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-4 sm:py-6 lg:py-0">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
             
             {/* Visual Canvas Column (Desktop alternating) */}
             <div
@@ -283,7 +321,7 @@ export default function ScrollChapter({
                 isVisualRight ? 'lg:order-2' : 'lg:order-1'
               }`}
             >
-              <div className="relative rounded-2xl overflow-hidden border border-brand-gold/30 bg-black/60 shadow-2xl group">
+              <div className="relative rounded-2xl overflow-hidden border border-brand-gold/30 bg-black/60 shadow-2xl group max-h-[42vh] sm:max-h-[50vh] lg:max-h-none mx-auto">
                 {/* 16:9 Canvas Container */}
                 <div className="relative w-full aspect-video">
                   {prefersReducedMotion ? (
@@ -300,15 +338,15 @@ export default function ScrollChapter({
                         className="w-full h-full object-cover block"
                       />
                       {/* Loading & Scrubbing HUD overlay */}
-                      <div className="absolute top-3 left-3 flex items-center space-x-2 bg-brand-navy-deep/80 backdrop-blur-md px-3 py-1 rounded-full border border-brand-gold/40 text-xs font-mono text-brand-gold">
-                        <span className="w-2 h-2 rounded-full bg-brand-gold animate-pulse"></span>
+                      <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 flex items-center space-x-2 bg-brand-navy-deep/85 backdrop-blur-md px-2.5 sm:px-3 py-1 rounded-full border border-brand-gold/40 text-[10px] sm:text-xs font-mono text-brand-gold shadow">
+                        <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-brand-gold animate-pulse"></span>
                         <span>
-                          CHAPTER {chapterNumber} • FRAME {String(currentFrameDisplay).padStart(2, '0')}/{frameCount}
+                          CH {chapterNumber} • FRAME {String(currentFrameDisplay).padStart(2, '0')}/{frameCount}
                         </span>
                       </div>
                       
                       {/* Scroll scrub prompt */}
-                      <div className="absolute bottom-3 right-3 hidden sm:flex items-center space-x-1.5 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full text-[11px] text-gray-300 border border-white/10">
+                      <div className="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 flex items-center space-x-1.5 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] text-gray-300 border border-white/10">
                         <span>Scroll to scrub</span>
                         <span className="text-brand-gold font-bold">↕</span>
                       </div>
@@ -328,49 +366,49 @@ export default function ScrollChapter({
               }`}
             >
               {/* Division Badge */}
-              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-brand-navy-light/60 border border-brand-gold/40 text-brand-gold text-xs font-semibold tracking-wider uppercase mb-3">
+              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-brand-navy-light/60 border border-brand-gold/40 text-brand-gold text-[10px] sm:text-xs font-semibold tracking-wider uppercase mb-2 sm:mb-3">
                 <span>CHAPTER {chapterNumber}</span>
                 <span className="text-gray-400">•</span>
                 <span>{badge}</span>
               </div>
 
               {/* Title & Headline */}
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight mb-4">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-extrabold text-white tracking-tight leading-snug sm:leading-tight mb-2 sm:mb-3">
                 {headline}
               </h2>
 
               {/* Editorial Description */}
-              <p className="text-gray-300 text-sm sm:text-base leading-relaxed mb-6 font-light">
+              <p className="text-gray-300 text-xs sm:text-sm lg:text-base leading-relaxed mb-3 sm:mb-5 font-light line-clamp-3 sm:line-clamp-none">
                 {description}
               </p>
 
               {/* Verified Division Highlights */}
-              <div className="space-y-3 mb-8">
+              <div className="space-y-2 sm:space-y-2.5 mb-4 sm:mb-6">
                 {highlights.map((item, idx) => (
-                  <div key={idx} className="flex items-start space-x-3">
-                    <CheckCircle2 className="w-5 h-5 text-brand-gold flex-shrink-0 mt-0.5" />
+                  <div key={idx} className="flex items-start space-x-2.5 sm:space-x-3">
+                    <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-brand-gold flex-shrink-0 mt-0.5" />
                     <div>
-                      <h4 className="text-sm font-semibold text-white">{item.title}</h4>
-                      <p className="text-xs text-gray-400">{item.desc}</p>
+                      <h4 className="text-xs sm:text-sm font-semibold text-white">{item.title}</h4>
+                      <p className="text-[11px] sm:text-xs text-gray-400 hidden sm:block">{item.desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
 
               {/* CTAs */}
-              <div className="flex flex-wrap items-center gap-3">
+              <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
                 <Link
                   href={primaryCta.href}
-                  className="inline-flex items-center justify-center px-6 py-3 rounded-lg text-sm font-bold bg-brand-gold hover:bg-brand-gold-light text-brand-navy-dark transition-all duration-200 transform hover:-translate-y-0.5 shadow-lg shadow-brand-gold/20"
+                  className="inline-flex items-center justify-center px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg text-xs sm:text-sm font-bold bg-brand-gold hover:bg-brand-gold-light text-brand-navy-dark transition-all duration-200 transform hover:-translate-y-0.5 shadow-lg shadow-brand-gold/20"
                 >
                   <span>{primaryCta.label}</span>
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 ml-1.5 sm:ml-2" />
                 </Link>
 
                 {secondaryCta && (
                   <Link
                     href={secondaryCta.href}
-                    className="inline-flex items-center justify-center px-5 py-3 rounded-lg text-sm font-medium text-gray-200 bg-brand-navy-light/60 hover:bg-brand-navy-light border border-white/10 hover:border-brand-gold/40 transition-all duration-200"
+                    className="inline-flex items-center justify-center px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-lg text-xs sm:text-sm font-medium text-gray-200 bg-brand-navy-light/60 hover:bg-brand-navy-light border border-white/10 hover:border-brand-gold/40 transition-all duration-200"
                   >
                     {secondaryCta.label}
                   </Link>

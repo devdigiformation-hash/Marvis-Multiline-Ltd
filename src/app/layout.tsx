@@ -4,6 +4,7 @@ import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CartDrawer from '@/components/CartDrawer';
+import WhatsAppButton from '@/components/WhatsAppButton';
 import { CartProvider } from '@/components/CartContext';
 
 const inter = Inter({
@@ -75,6 +76,7 @@ export default function RootLayout({
           <Header />
           <main className="flex-1 pt-16 sm:pt-20">{children}</main>
           <CartDrawer />
+          <WhatsAppButton />
           <Footer />
         </CartProvider>
       </body>

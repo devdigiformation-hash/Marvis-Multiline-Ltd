@@ -47,11 +47,17 @@ export interface TransportService {
   features: string[];
 }
 
+export const MARVIS_WHATSAPP_NUMBER = '447442807141';
+export const MARVIS_WHATSAPP_PREFILLED_MESSAGE = 'Hello MARVIS MULTILINE LTD, I would like to enquire about your services.';
+export const MARVIS_WHATSAPP_URL = `https://wa.me/${MARVIS_WHATSAPP_NUMBER}?text=${encodeURIComponent(MARVIS_WHATSAPP_PREFILLED_MESSAGE)}`;
+
 export const COMPANY_INFO = {
   name: 'Marvis Multiline Ltd',
   email: 'cyclecarts@gmail.com',
   phone: '07442807141',
   phoneHref: 'tel:+447442807141',
+  whatsappNumber: MARVIS_WHATSAPP_NUMBER,
+  whatsappUrl: MARVIS_WHATSAPP_URL,
   currency: 'GBP (£)',
   divisions: [
     { id: '01', name: 'Used Vehicle Sales', slug: 'used-vehicles', cta: 'Explore Vehicles' },
