@@ -52,7 +52,6 @@ export default function ScrollChapter({
   const [isNearViewport, setIsNearViewport] = useState(false);
   const [loadProgress, setLoadProgress] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [currentFrameDisplay, setCurrentFrameDisplay] = useState(1);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   // Measure rendered sticky header height dynamically
@@ -130,7 +129,6 @@ export default function ScrollChapter({
     (targetIndex: number) => {
       const clamped = Math.max(1, Math.min(frameCount, targetIndex));
       activeFrameRef.current = clamped;
-      setCurrentFrameDisplay(clamped);
 
       const cached = imagesCacheRef.current.get(clamped);
       if (cached && cached.complete) {
@@ -331,26 +329,11 @@ export default function ScrollChapter({
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <>
-                      <canvas
-                        ref={canvasRef}
-                        aria-hidden="true"
-                        className="w-full h-full object-cover block"
-                      />
-                      {/* Loading & Scrubbing HUD overlay */}
-                      <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 flex items-center space-x-2 bg-brand-navy-deep/85 backdrop-blur-md px-2.5 sm:px-3 py-1 rounded-full border border-brand-gold/40 text-[10px] sm:text-xs font-mono text-brand-gold shadow">
-                        <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-brand-gold animate-pulse"></span>
-                        <span>
-                          CH {chapterNumber} • FRAME {String(currentFrameDisplay).padStart(2, '0')}/{frameCount}
-                        </span>
-                      </div>
-                      
-                      {/* Scroll scrub prompt */}
-                      <div className="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 flex items-center space-x-1.5 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] text-gray-300 border border-white/10">
-                        <span>Scroll to scrub</span>
-                        <span className="text-brand-gold font-bold">↕</span>
-                      </div>
-                    </>
+                    <canvas
+                      ref={canvasRef}
+                      aria-hidden="true"
+                      className="w-full h-full object-cover block"
+                    />
                   )}
                 </div>
 
@@ -367,8 +350,6 @@ export default function ScrollChapter({
             >
               {/* Division Badge */}
               <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-brand-navy-light/60 border border-brand-gold/40 text-brand-gold text-[10px] sm:text-xs font-semibold tracking-wider uppercase mb-2 sm:mb-3">
-                <span>CHAPTER {chapterNumber}</span>
-                <span className="text-gray-400">•</span>
                 <span>{badge}</span>
               </div>
 
