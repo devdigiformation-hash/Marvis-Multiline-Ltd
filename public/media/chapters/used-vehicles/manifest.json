@@ -1,0 +1,11 @@
+{
+  "chapter": "01",
+  "slug": "used-vehicles",
+  "title": "Used Vehicles Sales",
+  "desktopAlign": "right",
+  "frameCount": 75,
+  "width": 1920,
+  "height": 1080,
+  "poster": "/media/chapters/used-vehicles/poster.jpg",
+  "framePattern": "/media/chapters/used-vehicles/frames/frame_%03d.jpg"
+}

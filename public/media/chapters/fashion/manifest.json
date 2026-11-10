@@ -1,0 +1,11 @@
+{
+  "chapter": "04",
+  "slug": "fashion",
+  "title": "Fashion Retail",
+  "desktopAlign": "left",
+  "frameCount": 75,
+  "width": 1920,
+  "height": 1080,
+  "poster": "/media/chapters/fashion/poster.jpg",
+  "framePattern": "/media/chapters/fashion/frames/frame_%03d.jpg"
+}

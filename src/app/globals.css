@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-montserrat: 'Montserrat', 'Inter', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #040D1A;
+  color: #F8FAFC;
+}
+
+body {
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Custom gold accent scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #040D1A;
+}
+::-webkit-scrollbar-thumb {
+  background: #0A2756;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C59B4E;
+}
+
+/* Canvas styling for crisp rendering */
+canvas {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Glow effects */
+.gold-glow {
+  box-shadow: 0 0 25px rgba(197, 155, 78, 0.2);
+}
+
+.gold-glow-lg {
+  box-shadow: 0 0 45px rgba(197, 155, 78, 0.35);
+}
+
+.navy-glow {
+  box-shadow: 0 10px 30px rgba(0, 31, 73, 0.5);
+}

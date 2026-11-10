@@ -1,0 +1,11 @@
+{
+  "chapter": "02",
+  "slug": "transport-support",
+  "title": "Transport Support",
+  "desktopAlign": "left",
+  "frameCount": 75,
+  "width": 1920,
+  "height": 1080,
+  "poster": "/media/chapters/transport-support/poster.jpg",
+  "framePattern": "/media/chapters/transport-support/frames/frame_%03d.jpg"
+}
