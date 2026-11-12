@@ -33,9 +33,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# raw media archives (frames extracted in public/media/chapters)
-*.mp4
-*.zip
-logo-transparent.png
+# raw media archives in root directory
+/*.mp4
+/*.zip
+/logo-transparent.png
+/Marvis Multiline Corporate Logo.png
 
 .vercel

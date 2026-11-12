@@ -1,24 +1,24 @@
 [
   {
-    "chapter": "01",
-    "slug": "car-repairing",
+    "id": "01",
     "title": "Automotive Inspection & Car Repairing",
-    "desktopAlign": "right",
     "frameCount": 50,
     "width": 1920,
     "height": 1080,
     "poster": "/media/chapters/car-repairing/poster.jpg",
-    "framePattern": "/media/chapters/car-repairing/frames/frame_%03d.jpg"
+    "framePattern": "/media/chapters/car-repairing/frames/frame_%03d.jpg",
+    "desktopAlign": "right",
+    "slug": "car-repairing"
   },
   {
-    "chapter": "02",
-    "slug": "cycle-repairing",
+    "id": "02",
     "title": "Bicycle Maintenance & Cycle Repairing",
-    "desktopAlign": "left",
     "frameCount": 50,
     "width": 1920,
     "height": 1080,
     "poster": "/media/chapters/cycle-repairing/poster.jpg",
-    "framePattern": "/media/chapters/cycle-repairing/frames/frame_%03d.jpg"
+    "framePattern": "/media/chapters/cycle-repairing/frames/frame_%03d.jpg",
+    "desktopAlign": "left",
+    "slug": "cycle-repairing"
   }
 ]
