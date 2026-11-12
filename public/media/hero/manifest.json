@@ -1,0 +1,10 @@
+{
+  "id": "hero-workshop",
+  "title": "Combined Car & Bicycle Repair Workshop",
+  "frameCount": 50,
+  "width": 1920,
+  "height": 1080,
+  "video": "/media/hero/hero-workshop.mp4",
+  "poster": "/media/hero/poster.jpg",
+  "framePattern": "/media/hero/frames/frame_%03d.jpg"
+}

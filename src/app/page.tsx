@@ -56,34 +56,47 @@ export default function HomePage() {
     <div className="relative w-full">
       
       {/* =========================================================
-          HERO SECTION — Brand Introduction & Direct Service Fast Anchors
+          HERO SECTION — Video 01 Full Workshop Cinematic Background
          ========================================================= */}
-      <section className="relative overflow-hidden pt-12 pb-16 lg:pt-16 lg:pb-24 bg-gradient-to-b from-brand-navy-deep via-brand-surface-dark to-brand-navy-deep border-b border-brand-navy-light/40">
+      <section className="relative overflow-hidden min-h-[85vh] lg:min-h-[92vh] flex items-center justify-center border-b border-brand-navy-light/40">
         
-        {/* Ambient atmospheric glow */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-brand-gold/10 blur-[130px] rounded-full pointer-events-none" />
-        <div className="absolute top-1/3 left-1/4 w-[400px] h-[300px] bg-brand-navy/30 blur-[100px] rounded-full pointer-events-none" />
+        {/* Full-bleed 100% width, safe viewport height cinematic video background */}
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster="/media/hero/poster.jpg"
+            className="w-full h-full object-cover object-center"
+          >
+            <source src="/media/hero/hero-workshop.mp4" type="video/mp4" />
+          </video>
+          {/* Subtle multi-layer gradient scrim to ensure WCAG AA contrast while showcasing the workshop action */}
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-surface-dark via-brand-navy-deep/80 to-brand-navy-deep/65" />
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Ambient atmospheric glow accents */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-brand-gold/10 blur-[130px] rounded-full pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16 sm:py-20 lg:py-24">
           <div className="text-center max-w-4xl mx-auto space-y-5">
             
             {/* Division Badge */}
-            <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-brand-navy-light/60 border border-brand-gold/40 text-brand-gold text-xs sm:text-sm font-semibold tracking-wide">
+            <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-brand-navy-light/70 backdrop-blur-md border border-brand-gold/40 text-brand-gold text-xs sm:text-sm font-semibold tracking-wide">
               <span className="w-2 h-2 rounded-full bg-brand-gold animate-pulse"></span>
               <span>INDEPENDENT UK CAR & CYCLE REPAIR SPECIALISTS</span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
-              Professional Craftsmanship in <br className="hidden sm:inline" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold-light via-brand-gold to-yellow-400">
-                Car & Cycle Repairing
-              </span>
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight drop-shadow-md">
+              Car & Bicycle Repair Services
             </h1>
 
             {/* Sub-headline */}
-            <p className="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto font-light leading-relaxed">
-              Marvis Multiline Ltd provides comprehensive automotive inspections, engine diagnostics, scheduled maintenance, and dedicated bicycle repair stand tune-ups across the United Kingdom.
+            <p className="text-base sm:text-lg text-gray-200 max-w-2xl mx-auto font-light leading-relaxed drop-shadow">
+              Explore practical car and bicycle repair and maintenance services. Marvis Multiline Ltd delivers comprehensive vehicle inspections, engine diagnostics, and dedicated bicycle repair stand tune-ups across the United Kingdom.
             </p>
 
             {/* Action CTAs */}
@@ -92,32 +105,32 @@ export default function HomePage() {
                 href="#car-repairing"
                 className="px-6 py-3.5 rounded-lg text-sm font-bold bg-brand-gold hover:bg-brand-gold-light text-brand-navy-deep transition-all duration-200 shadow-lg shadow-brand-gold/25 transform hover:-translate-y-0.5 inline-flex items-center space-x-2"
               >
-                <span>Explore Car Repairs</span>
+                <span>Explore Our Services</span>
                 <ChevronRight className="w-4 h-4" />
               </a>
 
               <a
-                href="#cycle-repairing"
-                className="px-6 py-3.5 rounded-lg text-sm font-medium text-white bg-brand-navy-light/60 hover:bg-brand-navy-light border border-white/10 hover:border-brand-gold/40 transition-colors inline-flex items-center space-x-2"
+                href="#book"
+                className="px-6 py-3.5 rounded-lg text-sm font-medium text-white bg-brand-navy-light/80 hover:bg-brand-navy-light border border-white/20 hover:border-brand-gold/50 transition-colors backdrop-blur-sm inline-flex items-center space-x-2"
               >
-                <span>Explore Cycle Repairs</span>
+                <span>Contact Us</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
             </div>
 
-            {/* Two Service Jump Anchors */}
+            {/* Two Service Fast Jump Anchors */}
             <div className="pt-6">
               <div className="flex flex-wrap items-center justify-center gap-3">
                 <a
                   href="#car-repairing"
-                  className="inline-flex items-center space-x-2 px-4 py-2 rounded-lg bg-brand-navy-light/40 hover:bg-brand-navy-light border border-white/5 hover:border-brand-gold/40 text-xs font-semibold text-gray-200 hover:text-brand-gold transition-all"
+                  className="inline-flex items-center space-x-2 px-4 py-2 rounded-lg bg-brand-navy-deep/80 hover:bg-brand-navy-light border border-white/10 hover:border-brand-gold/40 text-xs font-semibold text-gray-200 hover:text-brand-gold backdrop-blur-sm transition-all"
                 >
                   <Wrench className="w-3.5 h-3.5 text-brand-gold" />
                   <span>01. Car Repairing Services</span>
                 </a>
                 <a
                   href="#cycle-repairing"
-                  className="inline-flex items-center space-x-2 px-4 py-2 rounded-lg bg-brand-navy-light/40 hover:bg-brand-navy-light border border-white/5 hover:border-brand-gold/40 text-xs font-semibold text-gray-200 hover:text-brand-gold transition-all"
+                  className="inline-flex items-center space-x-2 px-4 py-2 rounded-lg bg-brand-navy-deep/80 hover:bg-brand-navy-light border border-white/10 hover:border-brand-gold/40 text-xs font-semibold text-gray-200 hover:text-brand-gold backdrop-blur-sm transition-all"
                 >
                   <Bike className="w-3.5 h-3.5 text-brand-gold" />
                   <span>02. Cycle Repairing Services</span>
@@ -126,7 +139,7 @@ export default function HomePage() {
             </div>
 
             {/* Stock Footage Disclosure */}
-            <p className="text-[11px] text-gray-400 italic pt-2">
+            <p className="text-[11px] text-gray-300 italic pt-2">
               Notice: Workshop video footage and photography on this website are illustrative stock-style media.
             </p>
 
