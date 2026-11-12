@@ -18,7 +18,7 @@ export default function ContactPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [division, setContactDivision] = useState('General Commercial');
+  const [division, setContactDivision] = useState('Division 01: Car Repairing & Diagnostics');
   const [message, setMessage] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -53,13 +53,13 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <span className="text-xs font-bold uppercase tracking-wider text-brand-gold">
-              Customer & Commercial Support
+              Customer & Workshop Support
             </span>
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mt-1">
               Contact Marvis Multiline Ltd
             </h1>
             <p className="text-sm sm:text-base text-gray-300 mt-3 font-light leading-relaxed">
-              Connect directly with our UK operations desk for showroom vehicle viewings, nationwide freight quotations, and commercial retail inquiries.
+              Connect directly with our UK workshop operations desk for car inspections, bicycle servicing quotes, recruitment, and general commercial inquiries.
             </p>
           </div>
         </div>
@@ -75,7 +75,7 @@ export default function ContactPage() {
               Direct Communication Channels
             </h2>
             <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-light">
-              We operate across all five divisions with dedicated coordinators to answer your technical, commercial, or logistics questions.
+              We operate dedicated coordinators for our Car Repairing and Cycle Repairing divisions to provide timely and accurate mechanical estimates.
             </p>
 
             <div className="space-y-4 pt-2">
@@ -110,7 +110,7 @@ export default function ContactPage() {
                     {COMPANY_INFO.email}
                   </a>
                   <div className="text-[11px] text-gray-400 mt-1">
-                    Monitored central inbox for orders, quotes, and documentation.
+                    Monitored central inbox for service requests, quotes, and recruitment.
                   </div>
                 </div>
               </div>
@@ -123,10 +123,21 @@ export default function ContactPage() {
                   <div className="text-xs text-gray-400">Operating Territory</div>
                   <div className="text-sm font-bold text-white mt-0.5">United Kingdom Mainland</div>
                   <div className="text-[11px] text-gray-400 mt-1">
-                    Serving England, Scotland, and Wales commercial sectors.
+                    Independent automotive and bicycle mechanical care.
                   </div>
                 </div>
               </div>
+            </div>
+
+            <div className="pt-2">
+              <a
+                href={COMPANY_INFO.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-3.5 px-4 rounded-xl bg-[#25D366]/20 border border-[#25D366]/40 text-[#25D366] font-semibold text-xs sm:text-sm hover:bg-[#25D366]/30 transition-all flex items-center justify-center space-x-2"
+              >
+                <span>Chat via Official WhatsApp ({COMPANY_INFO.phone})</span>
+              </a>
             </div>
           </div>
 
@@ -153,7 +164,7 @@ export default function ContactPage() {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="flex items-center space-x-2 border-b border-brand-navy-light/60 pb-3">
                     <MessageSquare className="w-4 h-4 text-brand-gold" />
-                    <h3 className="text-lg font-bold text-white">Commercial Enquiry Message</h3>
+                    <h3 className="text-lg font-bold text-white">Workshop & Service Enquiry</h3>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -175,7 +186,7 @@ export default function ContactPage() {
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="robert@company.co.uk"
+                        placeholder="robert@example.co.uk"
                         className="w-full px-3.5 py-2.5 rounded-lg bg-brand-surface-dark border border-white/10 text-white text-xs focus:outline-none focus:border-brand-gold"
                       />
                     </div>
@@ -199,12 +210,10 @@ export default function ContactPage() {
                         onChange={(e) => setContactDivision(e.target.value)}
                         className="w-full px-3.5 py-2.5 rounded-lg bg-brand-surface-dark border border-white/10 text-white text-xs focus:outline-none focus:border-brand-gold"
                       >
-                        <option value="Used Vehicle Sales">Division 01: Used Vehicle Viewing</option>
-                        <option value="Transport Support">Division 02: Freight & Haulage Quote</option>
-                        <option value="Hair & Beauty">Division 03: Hair & Beauty Grooming</option>
-                        <option value="Fashion Retail">Division 04: Fashion Apparel</option>
-                        <option value="Household Products">Division 05: Household Products</option>
-                        <option value="General Commercial">General Commercial Inquiries</option>
+                        <option value="Division 01: Car Repairing & Diagnostics">Division 01: Car Repairing & Diagnostics</option>
+                        <option value="Division 02: Cycle Repairing & Stand Servicing">Division 02: Cycle Repairing & Stand Servicing</option>
+                        <option value="Workshop Recruitment & Careers">Workshop Careers & Applications</option>
+                        <option value="General Commercial Inquiries">General Commercial & Workshop Enquiries</option>
                       </select>
                     </div>
                   </div>
@@ -216,7 +225,7 @@ export default function ContactPage() {
                       required
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      placeholder="Please outline your enquiry, desired delivery dates, vehicle registration, or bulk quantities..."
+                      placeholder="Please outline vehicle details, bicycle model, fault symptoms, or service requirements..."
                       className="w-full px-3.5 py-2.5 rounded-lg bg-brand-surface-dark border border-white/10 text-white text-xs focus:outline-none focus:border-brand-gold"
                     />
                   </div>

@@ -1,14 +1,11 @@
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/image';
+import Link from 'next/link';
 import {
   ShieldCheck,
   CheckCircle2,
-  Car,
-  Truck,
-  Sparkles,
-  Shirt,
-  Home,
+  Wrench,
+  Clock,
   Phone,
   Mail,
   ArrowRight
@@ -30,7 +27,7 @@ export default function AboutPage() {
               About Marvis Multiline Ltd
             </h1>
             <p className="text-sm sm:text-base text-gray-300 mt-3 font-light leading-relaxed">
-              Operating across the United Kingdom with five integrated commercial divisions spanning verified pre-owned vehicles, heavy transport freight, professional men&apos;s grooming, tailored apparel, and home essentials.
+              Operating dedicated independent mechanical repair services across the United Kingdom, specialising in automotive vehicle maintenance, engine diagnostics, and workshop stand bicycle tune-ups.
             </p>
           </div>
         </div>
@@ -47,23 +44,27 @@ export default function AboutPage() {
               <span>Verified British Enterprise</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-extrabold text-white leading-tight">
-              A Unified Standard of Commercial Reliability
+              A Unified Standard of Mechanical Craftsmanship
             </h2>
             <p className="text-sm text-gray-300 leading-relaxed font-light">
-              Founded on principles of operational transparency, uncompromising preparation, and direct communication, Marvis Multiline Ltd manages multiple dedicated sectors under one respected brand identity.
+              Founded on principles of operational transparency, thorough mechanical inspection, and direct communication, Marvis Multiline Ltd delivers professional car and cycle maintenance solutions under a respected British identity.
             </p>
             <p className="text-sm text-gray-300 leading-relaxed font-light">
-              From our flagship Mercedes-Benz Actros freight operations to individually inspected executive saloons, our company prioritises customer certainty, accurate descriptions, and rigorous compliance with UK trade practices.
+              From our electronic engine management diagnostics and safety-critical brake servicing to precision bicycle derailleur indexing on dedicated workshop repair stands, our company prioritises customer safety, accurate diagnosis, and transparent itemised estimates before work begins.
             </p>
 
-            <div className="pt-2 flex items-center space-x-6 text-xs text-gray-300">
+            <div className="pt-2 flex flex-wrap items-center gap-6 text-xs text-gray-300">
               <div className="flex items-center space-x-2">
                 <CheckCircle2 className="w-4 h-4 text-brand-gold" />
-                <span>5 Active Divisions</span>
+                <span>2 Dedicated Repair Divisions</span>
               </div>
               <div className="flex items-center space-x-2">
                 <CheckCircle2 className="w-4 h-4 text-brand-gold" />
                 <span>UK Mainland Coverage</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <CheckCircle2 className="w-4 h-4 text-brand-gold" />
+                <span>Clear Itemised Estimates</span>
               </div>
             </div>
           </div>
@@ -82,7 +83,7 @@ export default function AboutPage() {
                 </div>
                 <div>
                   <h3 className="text-xl font-extrabold text-white">MARVIS MULTILINE LTD</h3>
-                  <p className="text-xs text-brand-gold font-medium">Original Brand Identity & Seal</p>
+                  <p className="text-xs text-brand-gold font-medium">Original Corporate Brand Identity & Seal</p>
                 </div>
               </div>
 
@@ -112,95 +113,77 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* Five Operating Divisions Detailed Grid */}
+        {/* Two Operating Divisions Detailed Grid */}
         <div className="border-t border-brand-navy-light/40 pt-16">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <span className="text-xs font-bold uppercase tracking-wider text-brand-gold">
               Scope of Enterprise
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">
-              Our 5 Distinct Commercial Pillars
+              Our 2 Core Mechanical Pillars
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             
-            <div className="p-6 rounded-2xl bg-brand-navy-deep border border-brand-gold/20 flex flex-col justify-between">
+            <div className="p-8 rounded-3xl bg-brand-navy-deep border border-brand-gold/30 flex flex-col justify-between">
               <div>
-                <div className="w-10 h-10 rounded-lg bg-brand-navy-light text-brand-gold flex items-center justify-center mb-3">
-                  <Car className="w-5 h-5" />
+                <div className="w-12 h-12 rounded-xl bg-brand-navy-light text-brand-gold flex items-center justify-center mb-4">
+                  <Wrench className="w-6 h-6" />
                 </div>
-                <h4 className="text-base font-bold text-white mb-2">01. Used Vehicle Sales</h4>
-                <p className="text-xs text-gray-300 leading-relaxed">
-                  Certified executive saloons, SUVs, and luxury vehicles prepared to showroom standards with comprehensive HPI background checks.
+                <div className="text-xs font-mono font-bold text-brand-gold mb-1">DIVISION 01</div>
+                <h4 className="text-xl font-bold text-white mb-2">Car Repairing & Diagnostics</h4>
+                <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-light">
+                  Professional OBD-II electronic diagnostic scanning, brake pad and disc overhauls, interim/full manufacturer-specification servicing, suspension repairs, and pre-MOT mechanical inspections.
                 </p>
+              </div>
+
+              <div className="mt-6 pt-4 border-t border-brand-navy-light/60 flex items-center justify-between">
+                <Link
+                  href="/car-repairing"
+                  className="text-xs font-bold text-brand-gold hover:text-brand-gold-light inline-flex items-center space-x-1.5"
+                >
+                  <span>Explore Car Repairs</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
               </div>
             </div>
 
-            <div className="p-6 rounded-2xl bg-brand-navy-deep border border-brand-gold/20 flex flex-col justify-between">
+            <div className="p-8 rounded-3xl bg-brand-navy-deep border border-brand-gold/30 flex flex-col justify-between">
               <div>
-                <div className="w-10 h-10 rounded-lg bg-brand-navy-light text-brand-gold flex items-center justify-center mb-3">
-                  <Truck className="w-5 h-5" />
+                <div className="w-12 h-12 rounded-xl bg-brand-navy-light text-brand-gold flex items-center justify-center mb-4">
+                  <Wrench className="w-6 h-6" />
                 </div>
-                <h4 className="text-base font-bold text-white mb-2">02. Transport Support</h4>
-                <p className="text-xs text-gray-300 leading-relaxed">
-                  Trunking, direct courier, and bulk pallet logistics across the UK road network with our Mercedes Actros fleet and satellite tracking.
+                <div className="text-xs font-mono font-bold text-brand-gold mb-1">DIVISION 02</div>
+                <h4 className="text-xl font-bold text-white mb-2">Cycle Repairing & Workshop Stand Servicing</h4>
+                <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-light">
+                  Bicycle workshop stand maintenance for commuting, hybrid, road, and mountain bikes. Precision derailleur indexing, hydraulic disc brake bleeding, drivetrain degreasing, and wheel truing.
                 </p>
               </div>
-            </div>
 
-            <div className="p-6 rounded-2xl bg-brand-navy-deep border border-brand-gold/20 flex flex-col justify-between">
-              <div>
-                <div className="w-10 h-10 rounded-lg bg-brand-navy-light text-brand-gold flex items-center justify-center mb-3">
-                  <Sparkles className="w-5 h-5" />
-                </div>
-                <h4 className="text-base font-bold text-white mb-2">03. Hair & Beauty Products</h4>
-                <p className="text-xs text-gray-300 leading-relaxed">
-                  Curated gentleman&apos;s styling clay, argan beard elixirs, and scalp-fortifying cleansers free of harsh parabens and synthetic sulphates.
-                </p>
-              </div>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-brand-navy-deep border border-brand-gold/20 flex flex-col justify-between">
-              <div>
-                <div className="w-10 h-10 rounded-lg bg-brand-navy-light text-brand-gold flex items-center justify-center mb-3">
-                  <Shirt className="w-5 h-5" />
-                </div>
-                <h4 className="text-base font-bold text-white mb-2">04. Fashion Retail</h4>
-                <p className="text-xs text-gray-300 leading-relaxed">
-                  Classic British tailored overcoats, heavy Oxford cotton button-downs, and heavyweight organic t-shirts engineered for durability.
-                </p>
-              </div>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-brand-navy-deep border border-brand-gold/20 flex flex-col justify-between">
-              <div>
-                <div className="w-10 h-10 rounded-lg bg-brand-navy-light text-brand-gold flex items-center justify-center mb-3">
-                  <Home className="w-5 h-5" />
-                </div>
-                <h4 className="text-base font-bold text-white mb-2">05. Household Products Retail</h4>
-                <p className="text-xs text-gray-300 leading-relaxed">
-                  Modern energy-saving air fryers, professional tri-ply induction cookware sets, and cyclonic HEPA vacuum cleaners.
-                </p>
-              </div>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-brand-navy-light to-brand-navy-deep border border-brand-gold/40 flex flex-col justify-between">
-              <div>
-                <span className="text-xs font-bold text-brand-gold uppercase tracking-wider">Contact Operations</span>
-                <h4 className="text-lg font-bold text-white mt-1 mb-2">Have a Direct Enquiry?</h4>
-                <p className="text-xs text-gray-300 leading-relaxed">
-                  Reach out directly to our central UK operations team via telephone or official email.
-                </p>
-              </div>
-              <div className="mt-4 pt-3 border-t border-white/10 text-xs">
-                <a href={COMPANY_INFO.phoneHref} className="text-brand-gold font-bold hover:underline">
-                  Call {COMPANY_INFO.phone}
-                </a>
+              <div className="mt-6 pt-4 border-t border-brand-navy-light/60 flex items-center justify-between">
+                <Link
+                  href="/cycle-repairing"
+                  className="text-xs font-bold text-brand-gold hover:text-brand-gold-light inline-flex items-center space-x-1.5"
+                >
+                  <span>Explore Cycle Repairs</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
               </div>
             </div>
 
           </div>
+        </div>
+
+        {/* Operational Transparency & Disclosure */}
+        <div className="p-8 rounded-3xl bg-brand-navy-deep/60 border border-brand-navy-light/60 text-xs sm:text-sm text-gray-300 space-y-3">
+          <div className="flex items-center space-x-2 text-brand-gold font-bold uppercase tracking-wider text-xs">
+            <ShieldCheck className="w-4 h-4" />
+            <span>Illustrative Media Disclosure</span>
+          </div>
+          <p className="leading-relaxed font-light">
+            {COMPANY_INFO.disclaimer}
+          </p>
         </div>
 
       </div>

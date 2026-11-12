@@ -3,9 +3,7 @@ import { Inter, Montserrat } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import CartDrawer from '@/components/CartDrawer';
 import WhatsAppButton from '@/components/WhatsAppButton';
-import { CartProvider } from '@/components/CartContext';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -21,17 +19,19 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://marvis-multiline-ltd.vercel.app'),
-  title: 'Marvis Multiline Ltd | Premium UK Multi-Category E-Commerce',
+  title: 'Marvis Multiline Ltd | Automotive & Bicycle Repair Specialists UK',
   description:
-    'Marvis Multiline Ltd operates five premier divisions: Used Vehicle Sales, Transport Support, Hair & Beauty, Fashion Retail, and Household Products across the United Kingdom.',
+    'Marvis Multiline Ltd provides dedicated car inspections, engine diagnostics, vehicle maintenance, and professional bicycle stand repairs across the United Kingdom.',
   keywords: [
     'Marvis Multiline Ltd',
-    'Used Vehicles UK',
-    'Transport Support',
-    'Haulage Logistics',
-    'Mens Grooming',
-    'Menswear Fashion',
-    'Household Appliances UK',
+    'Car Repairing UK',
+    'Engine Diagnostics',
+    'Brake Servicing',
+    'Vehicle Maintenance',
+    'Cycle Repairing UK',
+    'Bicycle Mechanic',
+    'Gear Indexing',
+    'Bike Safety Check',
   ],
   authors: [{ name: 'Marvis Multiline Ltd' }],
   icons: {
@@ -39,10 +39,10 @@ export const metadata: Metadata = {
     apple: '/logo.png',
   },
   openGraph: {
-    title: 'Marvis Multiline Ltd | UK Multi-Division Enterprise',
+    title: 'Marvis Multiline Ltd | Car & Cycle Repair Specialists',
     description:
-      'Explore verified pre-owned vehicles, UK freight transport, professional grooming, tailored menswear, and premium household essentials.',
-    url: 'https://marvis-multiline.co.uk',
+      'Independent automotive diagnostics, routine car maintenance, and professional bicycle workshop repairs in the UK.',
+    url: 'https://marvis-multiline-ltd.vercel.app',
     siteName: 'Marvis Multiline Ltd',
     images: [
       {
@@ -72,13 +72,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${montserrat.variable} dark`}>
       <body className="bg-brand-surface-dark text-slate-100 antialiased selection:bg-brand-gold selection:text-brand-navy-deep min-h-screen flex flex-col font-sans">
-        <CartProvider>
-          <Header />
-          <main className="flex-1 pt-16 sm:pt-20">{children}</main>
-          <CartDrawer />
-          <WhatsAppButton />
-          <Footer />
-        </CartProvider>
+        <Header />
+        <main className="flex-1 pt-16 sm:pt-20">{children}</main>
+        <WhatsAppButton />
+        <Footer />
       </body>
     </html>
   );

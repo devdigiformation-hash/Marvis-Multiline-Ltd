@@ -1,58 +1,66 @@
 import React from 'react';
 import Link from 'next/link';
-import { HelpCircle, Phone, Mail, ArrowRight, ShieldCheck } from 'lucide-react';
+import { HelpCircle, Phone, Mail, ArrowRight, ShieldCheck, Wrench } from 'lucide-react';
 import { COMPANY_INFO } from '@/data/catalogue';
 
 export default function FAQPage() {
   const faqs = [
     {
-      category: 'Used Vehicles Division',
+      category: 'Division 01: Car Repairing & Diagnostics',
       items: [
         {
-          q: 'How are showroom vehicles checked before being offered for sale?',
-          a: 'Every pre-owned vehicle listed by Marvis Multiline Ltd undergoes a thorough multi-point mechanical inspection, complete HPI history check to ensure clear title without outstanding finance or write-off history, and verification of digital service records.'
+          q: 'What types of cars and light vehicles do you service?',
+          a: 'We service and maintain most popular UK petrol, diesel, and hybrid passenger cars, estate cars, and light commercial vehicles for routine mechanical servicing, brake system overhauls, suspension repairs, and electronic diagnostics.'
         },
         {
-          q: 'Can I test drive or inspect a vehicle in person?',
-          a: 'Yes, physical viewings and test inspections are arranged by appointment. You can submit a viewing request through our vehicle listings or contact our vehicle coordinator directly.'
+          q: 'How does your engine diagnostic process work?',
+          a: 'We connect professional OBD-II diagnostic equipment to scan the engine management, ABS, transmission, and body control units. We analyze live data streams and fault codes to diagnose issues before quoting or beginning any mechanical repairs.'
         },
         {
-          q: 'Are the registration numbers displayed genuine?',
-          a: 'To safeguard security and privacy, registration plates are partially masked in public listings (e.g. MV21 ***). Full unmasked registration details and VIN numbers are disclosed during formal viewing or upon enquiry.'
+          q: 'Do you replace brake pads and discs with manufacturer-specification parts?',
+          a: 'Yes. All brake replacements use certified OEM-specification or higher-grade brake pads and discs. We also measure disc runout, inspect calipers and flexi-hoses, and test fluid boiling points.'
+        },
+        {
+          q: 'Can you help prepare my car for its annual MOT test?',
+          a: 'Yes. Our pre-MOT inspection covers exterior lighting, tyre wear and sidewall condition, suspension play, wiper efficiency, and exhaust mountings to identify potential failure points in advance.'
         }
       ]
     },
     {
-      category: 'Transport & Freight Support',
+      category: 'Division 02: Cycle Repairing & Workshop Stand Servicing',
       items: [
         {
-          q: 'What types of freight do you handle?',
-          a: 'Our transport division operates full-trailer curtainsiders (Mercedes-Benz Actros, up to 28,000 kg capacity) for commercial pallet trunking, as well as high-roof long-wheelbase vans for direct express consignments across the UK mainland.'
+          q: 'What styles of bicycles do you service?',
+          a: 'Our workshop handles road bikes, commuter and hybrid cycles, mountain bikes, and gravel bikes equipped with Shimano, SRAM, or Campagnolo mechanical or electronic gear systems.'
         },
         {
-          q: 'Is my cargo insured during transit?',
-          a: 'Yes. All goods transported by Marvis Multiline Ltd are covered under comprehensive Goods in Transit insurance according to UK RHA / commercial standards.'
+          q: 'How do you fix slipping gears and chain rub?',
+          a: 'We mount your bicycle on a dedicated repair stand, check derailleur hanger alignment with a precision gauge, set high and low limit screws, calibrate B-tension, and index cable tension across all sprockets.'
         },
         {
-          q: 'Does submitting a quote form guarantee vehicle booking?',
-          a: 'No. Quote submissions are processed as pricing and availability inquiries. An official booking confirmation is provided once route schedules and vehicle allocation are formally agreed.'
+          q: 'Can you service both mechanical and hydraulic disc brakes on bicycles?',
+          a: 'Yes. We align calipers to eliminate rotor drag, inspect pad thickness, replace cables and housing, and perform complete mineral oil or DOT fluid bleeds for crisp lever modulation.'
+        },
+        {
+          q: 'What is the typical turnaround time for a bicycle tune-up?',
+          a: 'Routine tune-ups, gear indexing, and brake adjustments are typically completed within 24 to 48 hours depending on parts requirements and workshop scheduling.'
         }
       ]
     },
     {
-      category: 'Retail Divisions (Hair & Beauty, Fashion, Household)',
+      category: 'Estimates, Warranties & Website Media',
       items: [
         {
-          q: 'What are your delivery timescales across the UK?',
-          a: 'Standard UK mainland courier delivery typically takes 2–4 business days following commercial payment or order confirmation. Tracking numbers are issued upon dispatch.'
+          q: 'Do you provide an estimate before carrying out repairs?',
+          a: 'Yes. Transparency is our core principle. Following an initial diagnostic check or physical assessment, we provide an itemised estimate outlining parts and labour for your approval before proceeding.'
         },
         {
-          q: 'Are hair and grooming products cruelty-free?',
-          a: 'Yes. Our grooming formulations are manufactured to strict UK cosmetics standards and are never tested on animals, free of parabens and harsh synthetic sulphates.'
+          q: 'Are parts and workmanship covered by a guarantee?',
+          a: 'Yes. Replaced new parts carry manufacturer warranties, and workshop repair workmanship is guaranteed under standard UK Consumer Rights provisions.'
         },
         {
-          q: 'What is the return policy for clothing and appliances?',
-          a: 'Unworn fashion garments with tags intact and unused appliances in original packaging may be returned within 14 days of delivery. Please contact customer care for returns authorization.'
+          q: 'Are the photos and videos on this website real customer jobs?',
+          a: 'The cinematic video frame sequences and photography displayed on this website are illustrative stock-style media designed to showcase professional mechanical inspection standards. They do not claim to depict specific customer vehicles, proprietary premises, or private workshops.'
         }
       ]
     }
@@ -72,7 +80,7 @@ export default function FAQPage() {
               Frequently Asked Questions
             </h1>
             <p className="text-sm sm:text-base text-gray-300 mt-3 font-light leading-relaxed">
-              Transparent answers regarding our vehicle showroom standards, haulage quote workflows, and retail commercial distribution.
+              Clear answers regarding our automotive repair procedures, bicycle workshop stand servicing, transparent estimates, and workshop standards.
             </p>
           </div>
         </div>
@@ -82,7 +90,7 @@ export default function FAQPage() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-12">
         {faqs.map((group, gIdx) => (
           <div key={gIdx} className="space-y-4">
-            <h2 className="text-lg font-bold text-brand-gold uppercase tracking-wider border-b border-brand-navy-light/60 pb-2">
+            <h2 className="text-base sm:text-lg font-bold text-brand-gold uppercase tracking-wider border-b border-brand-navy-light/60 pb-2">
               {group.category}
             </h2>
             <div className="space-y-4">
@@ -106,28 +114,29 @@ export default function FAQPage() {
           </div>
         ))}
 
-        {/* Contact Assistance Box */}
-        <div className="p-8 rounded-3xl bg-gradient-to-r from-brand-navy-dark via-brand-navy-deep to-brand-navy-dark border border-brand-gold/40 text-center space-y-4">
-          <h3 className="text-xl font-bold text-white">Have a specific question?</h3>
-          <p className="text-xs text-gray-300 max-w-md mx-auto">
-            Our operational team is available to assist with vehicle technical files, freight routing, or commercial wholesale enquiries.
+        {/* Still have questions CTA */}
+        <div className="p-8 rounded-3xl bg-brand-navy-deep border border-brand-gold/30 text-center space-y-4">
+          <h3 className="text-xl font-bold text-white">Have a Specific Mechanical Query?</h3>
+          <p className="text-xs sm:text-sm text-gray-300 max-w-md mx-auto font-light">
+            Contact our UK operations desk directly or message us on WhatsApp for advice and booking availability.
           </p>
-          <div className="flex justify-center items-center space-x-4 pt-2">
-            <a
-              href={COMPANY_INFO.phoneHref}
-              className="px-5 py-2.5 rounded-lg bg-brand-gold text-brand-navy-deep font-bold text-xs hover:bg-brand-gold-light transition-colors"
-            >
-              Call {COMPANY_INFO.phone}
-            </a>
+          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
             <Link
               href="/contact"
-              className="px-5 py-2.5 rounded-lg bg-brand-navy-light text-white font-medium text-xs hover:bg-brand-navy transition-colors border border-white/10"
+              className="px-6 py-2.5 rounded-lg bg-brand-gold text-brand-navy-deep font-bold text-xs sm:text-sm hover:bg-brand-gold-light transition-all"
             >
-              Send Message
+              Contact Workshop Team
             </Link>
+            <a
+              href={COMPANY_INFO.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-2.5 rounded-lg bg-[#25D366]/20 border border-[#25D366]/40 text-[#25D366] font-semibold text-xs sm:text-sm hover:bg-[#25D366]/30 transition-all"
+            >
+              WhatsApp Us
+            </a>
           </div>
         </div>
-
       </div>
 
     </div>

@@ -33,9 +33,9 @@ export default function PrivacyPolicyPage() {
           <h2 className="text-base font-bold text-white">2. Information We Collect</h2>
           <p>We collect and process personal data you voluntarily provide when:</p>
           <ul className="list-disc pl-5 space-y-1 text-gray-400">
-            <li>Submitting a pre-owned vehicle viewing or test inspection request.</li>
-            <li>Submitting a transport freight or haulage quote form with origin and destination postcodes.</li>
-            <li>Submitting commercial orders or sample requests for retail grooming, menswear, or household products.</li>
+            <li>Submitting an automotive inspection, engine diagnostic, or repair quote request.</li>
+            <li>Submitting a bicycle tune-up, gear indexing, or workshop stand service enquiry.</li>
+            <li>Submitting a job application or CV details for workshop technician and mechanic vacancies.</li>
             <li>Contacting our operations desk via email, phone, or website contact forms.</li>
           </ul>
         </div>
@@ -43,14 +43,14 @@ export default function PrivacyPolicyPage() {
         <div className="p-6 rounded-2xl bg-brand-navy-deep border border-brand-gold/20 space-y-3">
           <h2 className="text-base font-bold text-white">3. Lawful Basis & Usage</h2>
           <p>
-            Your information is used strictly to fulfill your requested commercial service, generate official quotations, arrange showroom visits, or dispatch verified retail consignments. We never sell, rent, or lease customer data to third-party marketing brokers.
+            Your information is used strictly to fulfill your requested mechanical services, generate itemised repair estimates, confirm workshop bookings, or process recruitment applications. We never sell, rent, or lease customer data to third-party marketing brokers.
           </p>
         </div>
 
         <div className="p-6 rounded-2xl bg-brand-navy-deep border border-brand-gold/20 space-y-3">
           <h2 className="text-base font-bold text-white">4. Your Statutory Rights</h2>
           <p>
-            Under UK GDPR, you retain the right to access, rectify, or request erasure of your personal records held by Marvis Multiline Ltd. To exercise your rights, please submit your request to cyclecarts@gmail.com.
+            Under UK GDPR, you retain the right to access, rectify, or request erasure of your personal records held by Marvis Multiline Ltd. To exercise your rights, please submit your request to <a href={`mailto:${COMPANY_INFO.email}`} className="text-brand-gold underline">{COMPANY_INFO.email}</a>.
           </p>
         </div>
       </div>

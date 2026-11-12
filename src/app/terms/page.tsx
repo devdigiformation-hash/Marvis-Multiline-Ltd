@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldAlert, FileText, Phone } from 'lucide-react';
+import { ShieldAlert, FileText, Phone, Wrench } from 'lucide-react';
 import { COMPANY_INFO } from '@/data/catalogue';
 
 export default function TermsPage() {
@@ -9,13 +9,13 @@ export default function TermsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <span className="text-xs font-bold uppercase tracking-wider text-brand-gold">
-              Commercial Regulations
+              Workshop Regulations
             </span>
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mt-1">
-              Terms & Conditions of Commercial Service
+              Terms & Conditions of Mechanical Repair Services
             </h1>
             <p className="text-sm sm:text-base text-gray-300 mt-3 font-light leading-relaxed">
-              Standard operating terms governing pre-owned vehicle appointments, road freight transport quotes, and commercial retail supply from Marvis Multiline Ltd.
+              Standard operating terms governing automotive inspections, car repairs, and bicycle workshop servicing from Marvis Multiline Ltd.
             </p>
           </div>
         </div>
@@ -23,30 +23,37 @@ export default function TermsPage() {
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-8 text-xs sm:text-sm text-gray-300 leading-relaxed">
         <div className="p-6 rounded-2xl bg-brand-navy-deep border border-brand-gold/20 space-y-3">
-          <h2 className="text-base font-bold text-white">1. Used Vehicle Viewings & Sales</h2>
+          <h2 className="text-base font-bold text-white">1. Estimates, Inspections & Authorisation</h2>
           <p>
-            Vehicle listings presented on this website constitute invitations to treat. Display of a vehicle does not guarantee availability at the moment of request. Vehicle viewings are scheduled free of obligation. Final sale contracts are executed upon physical vehicle inspection, signed purchase invoice, and full settlement of funds in GBP.
+            All online booking submissions, website enquiries, and preliminary discussions constitute requests for mechanical inspection and estimates. Work commences only after the customer has reviewed and formally authorised an itemised quotation detailing required parts and estimated labour in GBP.
           </p>
         </div>
 
         <div className="p-6 rounded-2xl bg-brand-navy-deep border border-brand-gold/20 space-y-3">
-          <h2 className="text-base font-bold text-white">2. Transport Support & Freight Quotations</h2>
+          <h2 className="text-base font-bold text-white">2. Automotive Diagnostic Procedures & Parts</h2>
           <p>
-            Submitted transport quote requests are evaluated based on fleet availability (Mercedes-Benz Actros unit or dedicated van). Rates provided are subject to route access conditions, cargo declared weight, and agreed collection windows. Transit contracts are governed by standard UK Road Haulage conditions.
+            Electronic diagnostic scans identify fault codes and live sensor data at the time of testing. Should unforeseen wear or damage be uncovered during mechanical disassembly (e.g. seized caliper sliders or stripped threads), the customer will be notified promptly with a revised estimate prior to fitting replacement components. All parts supplied meet or exceed OEM specifications.
           </p>
         </div>
 
         <div className="p-6 rounded-2xl bg-brand-navy-deep border border-brand-gold/20 space-y-3">
-          <h2 className="text-base font-bold text-white">3. Commercial Retail Orders & Enquiries</h2>
+          <h2 className="text-base font-bold text-white">3. Bicycle Workshop Servicing & Safety Standards</h2>
           <p>
-            Orders placed via the commercial enquiry cart are processed by our sales desk. Once stock is verified, an official invoice detailing item quantities, UK delivery fees, and payment instructions is issued. Title to goods passes upon full cleared payment.
+            Bicycles submitted for stand servicing, derailleur indexing, brake maintenance, or wheel truing undergo multi-point safety checks. Any safety-critical structural fatigue discovered in bicycle frames, carbon forks, or rims will be brought to the customer&apos;s attention immediately.
           </p>
         </div>
 
         <div className="p-6 rounded-2xl bg-brand-navy-deep border border-brand-gold/20 space-y-3">
-          <h2 className="text-base font-bold text-white">4. Jurisdiction & Governing Law</h2>
+          <h2 className="text-base font-bold text-white">4. Illustrative Media & Website Content</h2>
           <p>
-            These terms and any commercial contracts arising shall be governed by and construed in accordance with the laws of England and Wales. The courts of England and Wales shall have exclusive jurisdiction.
+            Cinematic video sequences and photographic assets displayed on this website are illustrative stock-style media designed to illustrate repair standards and procedures. They do not depict specific customer vehicles, proprietary premises, or private client workshops.
+          </p>
+        </div>
+
+        <div className="p-6 rounded-2xl bg-brand-navy-deep border border-brand-gold/20 space-y-3">
+          <h2 className="text-base font-bold text-white">5. Settlement & Governing Law</h2>
+          <p>
+            Completed repairs are settled upon vehicle or bicycle handover unless corporate credit terms have been arranged in advance. These terms and any service contracts shall be governed by and construed in accordance with the laws of England and Wales.
           </p>
         </div>
       </div>

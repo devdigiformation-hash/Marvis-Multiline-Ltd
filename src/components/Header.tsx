@@ -8,25 +8,19 @@ import {
   Menu,
   X,
   Phone,
-  ShoppingBag,
-  ChevronDown,
-  Car,
-  Truck,
-  Sparkles,
-  Shirt,
-  Home,
-  ShieldCheck,
-  Search
+  Wrench,
+  Bike,
+  Briefcase,
+  Info,
+  Mail,
+  CalendarCheck
 } from 'lucide-react';
-import { useCart } from './CartContext';
 import { COMPANY_INFO } from '@/data/catalogue';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const pathname = usePathname();
-  const { cartCount, setIsCartOpen } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,15 +33,15 @@ export default function Header() {
   // Close mobile menu on route change
   useEffect(() => {
     setIsOpen(false);
-    setIsDropdownOpen(false);
   }, [pathname]);
 
-  const navDivisions = [
-    { name: 'Used Vehicles', href: '/used-vehicles', icon: Car, desc: 'Quality UK inventory & viewings' },
-    { name: 'Transport Support', href: '/transport-support', icon: Truck, desc: 'Nationwide freight & quotes' },
-    { name: 'Hair & Beauty', href: '/hair-beauty', icon: Sparkles, desc: "Men's grooming essentials" },
-    { name: 'Fashion Retail', href: '/fashion', icon: Shirt, desc: "Tailored men's apparel" },
-    { name: 'Household Products', href: '/household', icon: Home, desc: 'Appliances, cookware & storage' },
+  const navLinks = [
+    { name: 'Home', href: '/' },
+    { name: 'Car Repairing', href: '/car-repairing', icon: Wrench },
+    { name: 'Cycle Repairing', href: '/cycle-repairing', icon: Bike },
+    { name: 'Careers', href: '/careers', icon: Briefcase },
+    { name: 'About', href: '/about', icon: Info },
+    { name: 'Contact', href: '/contact', icon: Mail },
   ];
 
   return (
@@ -55,13 +49,13 @@ export default function Header() {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? 'bg-brand-navy-deep/95 backdrop-blur-md shadow-xl border-b border-brand-navy-light/60 py-2.5'
-          : 'bg-brand-navy-deep/80 backdrop-blur-sm border-b border-brand-gold/20 py-3.5'
+          : 'bg-brand-navy-deep/85 backdrop-blur-sm border-b border-brand-gold/20 py-3.5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           
-          {/* Brand Logo - Preserves exact uploaded logo */}
+          {/* Brand Logo - Preserves exact approved MARVIS MULTILINE LTD logo */}
           <Link href="/" className="flex items-center space-x-3 group">
             <div className="relative w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-lg p-1 shadow-md border border-brand-gold/40 flex-shrink-0 flex items-center justify-center overflow-hidden">
               <Image
@@ -78,98 +72,29 @@ export default function Header() {
                 MARVIS MULTILINE
               </span>
               <span className="text-[10px] sm:text-xs font-semibold tracking-widest text-brand-gold uppercase">
-                Limited • UK Multi-Division
+                Car & Cycle Repair Specialists
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-1">
-            <Link
-              href="/"
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                pathname === '/' ? 'text-brand-gold bg-brand-navy-light/60' : 'text-gray-300 hover:text-white hover:bg-brand-navy-light/40'
-              }`}
-            >
-              Home
-            </Link>
-
-            {/* Divisions Dropdown */}
-            <div className="relative" onMouseLeave={() => setIsDropdownOpen(false)}>
-              <button
-                onMouseEnter={() => setIsDropdownOpen(true)}
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className={`inline-flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                  navDivisions.some((d) => pathname.startsWith(d.href))
-                    ? 'text-brand-gold bg-brand-navy-light/60'
-                    : 'text-gray-300 hover:text-white hover:bg-brand-navy-light/40'
-                }`}
-                aria-expanded={isDropdownOpen}
-              >
-                <span>5 Operating Divisions</span>
-                <ChevronDown className="ml-1 w-4 h-4 text-brand-gold" />
-              </button>
-
-              {isDropdownOpen && (
-                <div
-                  onMouseEnter={() => setIsDropdownOpen(true)}
-                  className="absolute left-0 mt-1 w-80 rounded-xl bg-brand-navy-deep border border-brand-gold/40 shadow-2xl py-2 z-50 animate-fadeIn"
+            {navLinks.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`px-3.5 py-2 rounded-md text-sm font-medium transition-colors ${
+                    isActive
+                      ? 'text-brand-gold bg-brand-navy-light/70 font-semibold'
+                      : 'text-gray-300 hover:text-white hover:bg-brand-navy-light/40'
+                  }`}
                 >
-                  <div className="px-3 py-2 border-b border-brand-navy-light/40 mb-1">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-brand-gold">
-                      Active Business Divisions
-                    </span>
-                  </div>
-                  {navDivisions.map((item) => {
-                    const Icon = item.icon;
-                    return (
-                      <Link
-                        key={item.name}
-                        href={item.href}
-                        className="flex items-start px-3 py-2.5 hover:bg-brand-navy-light/60 transition-colors rounded-lg mx-1 group"
-                      >
-                        <div className="p-2 rounded-lg bg-brand-navy-light/80 text-brand-gold group-hover:bg-brand-gold group-hover:text-brand-navy-deep transition-colors mr-3 mt-0.5">
-                          <Icon className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <div className="text-sm font-semibold text-white group-hover:text-brand-gold transition-colors">
-                            {item.name}
-                          </div>
-                          <div className="text-xs text-gray-400">{item.desc}</div>
-                        </div>
-                      </Link>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-
-            <Link
-              href="/shop"
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                pathname === '/shop' ? 'text-brand-gold bg-brand-navy-light/60' : 'text-gray-300 hover:text-white hover:bg-brand-navy-light/40'
-              }`}
-            >
-              Unified Catalogue
-            </Link>
-
-            <Link
-              href="/about"
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                pathname === '/about' ? 'text-brand-gold bg-brand-navy-light/60' : 'text-gray-300 hover:text-white hover:bg-brand-navy-light/40'
-              }`}
-            >
-              About
-            </Link>
-
-            <Link
-              href="/contact"
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                pathname === '/contact' ? 'text-brand-gold bg-brand-navy-light/60' : 'text-gray-300 hover:text-white hover:bg-brand-navy-light/40'
-              }`}
-            >
-              Contact
-            </Link>
+                  {item.name}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Right Header Actions */}
@@ -184,19 +109,15 @@ export default function Header() {
               <span>{COMPANY_INFO.phone}</span>
             </a>
 
-            {/* Cart Trigger */}
-            <button
-              onClick={() => setIsCartOpen(true)}
-              className="relative p-2 rounded-lg bg-brand-navy-light/60 hover:bg-brand-navy-light text-white border border-white/10 hover:border-brand-gold/40 transition-colors"
-              aria-label="View Cart and Enquiries"
+            {/* Direct Booking CTA */}
+            <Link
+              href="/contact?subject=service-booking"
+              className="px-3.5 py-2 rounded-lg text-xs font-bold bg-brand-gold hover:bg-brand-gold-light text-brand-navy-deep transition-all duration-200 shadow-md shadow-brand-gold/20 flex items-center space-x-1.5"
             >
-              <ShoppingBag className="w-5 h-5 text-brand-gold" />
-              {cartCount > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 w-5 h-5 flex items-center justify-center text-[10px] font-bold bg-brand-gold text-brand-navy-deep rounded-full shadow">
-                  {cartCount}
-                </span>
-              )}
-            </button>
+              <CalendarCheck className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Book Service</span>
+              <span className="sm:hidden">Book</span>
+            </Link>
 
             {/* Mobile Hamburger Button */}
             <button
@@ -214,55 +135,41 @@ export default function Header() {
       {isOpen && (
         <div className="lg:hidden bg-brand-navy-deep border-b border-brand-gold/30 px-4 pt-3 pb-6 space-y-3 animate-fadeIn">
           <div className="grid grid-cols-1 gap-1">
-            <Link
-              href="/"
-              className="px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-navy-light"
-            >
-              Home
-            </Link>
-            <div className="px-3 pt-2 text-xs font-bold text-brand-gold uppercase tracking-wider">
-              5 Operating Divisions
-            </div>
-            {navDivisions.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="flex items-center px-4 py-2 text-sm text-gray-200 hover:text-brand-gold hover:bg-brand-navy-light/40 rounded-lg"
-              >
-                <item.icon className="w-4 h-4 mr-2.5 text-brand-gold" />
-                <span>{item.name}</span>
-              </Link>
-            ))}
+            {navLinks.map((item) => {
+              const Icon = item.icon || Wrench;
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`flex items-center px-4 py-2.5 text-sm rounded-lg transition-colors ${
+                    isActive
+                      ? 'text-brand-gold bg-brand-navy-light/70 font-semibold'
+                      : 'text-gray-200 hover:text-brand-gold hover:bg-brand-navy-light/40'
+                  }`}
+                >
+                  <Icon className="w-4 h-4 mr-2.5 text-brand-gold" />
+                  <span>{item.name}</span>
+                </Link>
+              );
+            })}
 
-            <div className="border-t border-brand-navy-light/40 my-2 pt-2">
-              <Link
-                href="/shop"
-                className="block px-3 py-2 text-base font-medium text-gray-200 hover:text-brand-gold hover:bg-brand-navy-light rounded-md"
-              >
-                Unified Catalogue
-              </Link>
-              <Link
-                href="/about"
-                className="block px-3 py-2 text-base font-medium text-gray-200 hover:text-brand-gold hover:bg-brand-navy-light rounded-md"
-              >
-                About Company
-              </Link>
-              <Link
-                href="/contact"
-                className="block px-3 py-2 text-base font-medium text-gray-200 hover:text-brand-gold hover:bg-brand-navy-light rounded-md"
-              >
-                Contact & Support
-              </Link>
-            </div>
-
-            <div className="pt-2">
+            <div className="pt-3 border-t border-brand-navy-light/40 space-y-2">
               <a
                 href={COMPANY_INFO.phoneHref}
-                className="flex items-center justify-center space-x-2 w-full py-2.5 px-4 rounded-lg bg-brand-gold text-brand-navy-deep font-bold text-sm shadow-md"
+                className="flex items-center justify-center space-x-2 w-full py-2.5 px-4 rounded-lg bg-brand-navy-light text-brand-gold font-bold text-xs border border-brand-gold/30"
               >
                 <Phone className="w-4 h-4" />
                 <span>Call {COMPANY_INFO.phone}</span>
               </a>
+
+              <Link
+                href="/contact?subject=service-booking"
+                className="flex items-center justify-center space-x-2 w-full py-2.5 px-4 rounded-lg bg-brand-gold text-brand-navy-deep font-bold text-xs shadow-md"
+              >
+                <CalendarCheck className="w-4 h-4" />
+                <span>Book Service / Inspection</span>
+              </Link>
             </div>
           </div>
         </div>

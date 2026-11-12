@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Mail, Phone, MapPin, ShieldCheck, ArrowUpRight } from 'lucide-react';
+import { Mail, Phone, ShieldCheck, ArrowUpRight, Wrench, Bike, Briefcase } from 'lucide-react';
 import { COMPANY_INFO } from '@/data/catalogue';
 
 export default function Footer() {
@@ -16,7 +16,7 @@ export default function Footer() {
             <div className="flex items-center space-x-3">
               <ShieldCheck className="w-6 h-6 text-brand-gold flex-shrink-0" />
               <p className="text-sm text-gray-200">
-                <strong className="text-white">Marvis Multiline Ltd</strong> — Verified UK Commercial Operations across 5 Integrated Divisions.
+                <strong className="text-white">Marvis Multiline Ltd</strong> — Independent UK Car Repairing & Bicycle Workshop Services.
               </p>
             </div>
             <div className="flex items-center space-x-4">
@@ -60,13 +60,13 @@ export default function Footer() {
                   MARVIS MULTILINE LTD
                 </span>
                 <p className="text-xs text-brand-gold font-medium">
-                  Multi-Category Enterprise • United Kingdom
+                  Automotive & Bicycle Repair Services • UK
                 </p>
               </div>
             </Link>
 
             <p className="text-xs sm:text-sm text-gray-400 leading-relaxed max-w-sm">
-              Delivering verified pre-owned vehicles, nationwide transport support, professional men&apos;s grooming, tailored menswear, and essential household goods with rigorous UK operational standards.
+              Providing dependable vehicle diagnostics, brake and engine maintenance, routine servicing, and professional bicycle stand tune-ups, gear indexing, and brake servicing across the United Kingdom.
             </p>
 
             <div className="pt-2 text-xs space-y-2 text-gray-400">
@@ -85,50 +85,59 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Business Divisions Column */}
+          {/* Core Repair Services Column */}
           <div className="space-y-3">
             <h4 className="text-xs font-bold text-brand-gold uppercase tracking-wider">
-              5 Operating Divisions
+              Repair Services
             </h4>
             <ul className="space-y-2 text-xs">
-              {COMPANY_INFO.divisions.map((div) => (
-                <li key={div.slug}>
-                  <Link
-                    href={`/${div.slug}`}
-                    className="text-gray-300 hover:text-brand-gold transition-colors flex items-center group"
-                  >
-                    <span>{div.name}</span>
-                    <ArrowUpRight className="w-3 h-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link
+                  href="/car-repairing"
+                  className="text-gray-300 hover:text-brand-gold transition-colors flex items-center group"
+                >
+                  <Wrench className="w-3.5 h-3.5 mr-1.5 text-brand-gold" />
+                  <span>Car Repairing</span>
+                  <ArrowUpRight className="w-3 h-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/cycle-repairing"
+                  className="text-gray-300 hover:text-brand-gold transition-colors flex items-center group"
+                >
+                  <Bike className="w-3.5 h-3.5 mr-1.5 text-brand-gold" />
+                  <span>Cycle Repairing</span>
+                  <ArrowUpRight className="w-3 h-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/careers"
+                  className="text-gray-300 hover:text-brand-gold transition-colors flex items-center group"
+                >
+                  <Briefcase className="w-3.5 h-3.5 mr-1.5 text-brand-gold" />
+                  <span>Careers / Jobs</span>
+                  <ArrowUpRight className="w-3 h-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Quick & Commercial Links */}
+          {/* Quick Links Column */}
           <div className="space-y-3">
             <h4 className="text-xs font-bold text-brand-gold uppercase tracking-wider">
-              Navigation
+              Company
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
-                <Link href="/shop" className="text-gray-300 hover:text-brand-gold transition-colors">
-                  Unified Catalogue
-                </Link>
-              </li>
-              <li>
                 <Link href="/about" className="text-gray-300 hover:text-brand-gold transition-colors">
-                  About Our Operations
-                </Link>
-              </li>
-              <li>
-                <Link href="/transport-support#quote" className="text-gray-300 hover:text-brand-gold transition-colors">
-                  Transport Quote Calculator
+                  About Our Company
                 </Link>
               </li>
               <li>
                 <Link href="/contact" className="text-gray-300 hover:text-brand-gold transition-colors">
-                  Direct Enquiry & Support
+                  Contact & Bookings
                 </Link>
               </li>
               <li>
@@ -138,7 +147,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/admin" className="text-brand-gold/80 hover:text-brand-gold transition-colors font-mono text-[11px]">
-                  [Admin Portal Preview]
+                  [Admin Ledger]
                 </Link>
               </li>
             </ul>
@@ -157,12 +166,12 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/terms" className="text-gray-300 hover:text-brand-gold transition-colors">
-                  Commercial Terms of Sale
+                  Service Terms & Conditions
                 </Link>
               </li>
             </ul>
             <div className="p-3 rounded-lg bg-brand-navy-light/40 border border-white/5 text-[11px] text-gray-400 mt-3 leading-relaxed">
-              All vehicle and freight quotes are subject to physical check and formal confirmation prior to contractual binding.
+              Images and footage on this site are illustrative stock-style media. All mechanical repair quotes are subject to physical inspection.
             </div>
           </div>
 
@@ -172,7 +181,7 @@ export default function Footer() {
         <div className="border-t border-brand-navy-light/40 mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-3">
           <p>© {currentYear} Marvis Multiline Ltd. All rights reserved.</p>
           <p className="text-[11px]">
-            Designed & Engineered with Cinematic Scroll Sequence Architecture.
+            Car & Cycle Repair Specialists • United Kingdom
           </p>
         </div>
       </div>

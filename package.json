@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "extract-frames": "python scripts/extract_frames.py"
+    "extract-frames": "python scripts/extract_two_videos.py"
   },
   "dependencies": {
     "clsx": "^2.1.1",
